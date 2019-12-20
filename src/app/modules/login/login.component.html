@@ -5,7 +5,7 @@
         Cheerio
       </h1>
     </div>
-    <form [formGroup]="loginGroup" (submit)="login()" class="login__form">
+    <form [formGroup]="loginGroup" class="login__form">
       <div>
         <input formControlName="login" placeholder="Email" type="email" />
         <i class="fas fa-at form__icon"></i>
@@ -18,7 +18,7 @@
       </div>
       <div class="form__container">
         <div>
-          <button class="btn form__container--btn" type="submit">
+          <button class="btn form__container--btn" type="submit" (click)="logIn()">
             Sign in
           </button>
         </div>

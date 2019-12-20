@@ -1,6 +1,4 @@
 export interface UnitModel {
-
-  id?: string
-  name: string
-
+  id?: string;
+  name: string;
 }

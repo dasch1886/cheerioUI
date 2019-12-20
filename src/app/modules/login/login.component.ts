@@ -2,14 +2,19 @@ import { UserService } from './../../core/http/user/user.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppRoute } from '../../app.route';
+import { LoginRoute } from './login.route';
+import { SessionService } from '../../core/services/session.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss', './styles/common-styles.scss']
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router, private fb: FormBuilder,
-    private userService: UserService) { }
+  constructor(private router: Router,
+    private fb: FormBuilder,
+    private userService: UserService,
+    private sessionService: SessionService) { }
 
   public loginGroup: FormGroup;
   ngOnInit() {
@@ -18,26 +23,29 @@ export class LoginComponent implements OnInit {
 
   private loginInit() {
     this.loginGroup = this.fb.group({
-      login: "",
-      password: ""
+      login: '',
+      password: ''
     });
   }
 
-  public goToRegistration() {
-    this.router.navigateByUrl(this.router.url + '/registration');
+  goToRegistration() {
+    this.router.navigateByUrl(this.router.url + '/' + LoginRoute.REGISTRATION);
   }
 
 
-  public async login() {
-    try {
-      const response = await this.userService.login(this.loginGroup.get("login").value, this.loginGroup.get("password").value)
-        .toPromise();
-      window.localStorage.setItem("token", JSON.stringify(response));
-      this.router.navigateByUrl('/home');
-    }
-    catch{
-      alert("Login failed!");
-    }
+  logIn() {
+    this.userService.login(
+      this.loginGroup.get('login').value,
+      this.loginGroup.get('password').value
+    ).subscribe(() => {
+      this.sessionService.getIsLogged().subscribe(result => {
+        if (result) {
+          this.router.navigateByUrl(AppRoute.HOME);
+        }
+      });
+    },
+      err => {
+        console.log(err);
+      });
   }
-
 }

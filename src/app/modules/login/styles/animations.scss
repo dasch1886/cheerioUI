@@ -1,9 +1,22 @@
-@keyframes zoom {
+@-webkit-keyframes zoom {
   from {
+    -webkit-transform: scale(0.75);
     transform: scale(0.75);
   }
 
   to {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes zoom {
+  from {
+    -webkit-transform: scale(0.75);
+    transform: scale(0.75);
+  }
+
+  to {
+    -webkit-transform: scale(1);
     transform: scale(1);
   }
 }

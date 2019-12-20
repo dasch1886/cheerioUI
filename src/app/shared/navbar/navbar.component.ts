@@ -1,28 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppRoute } from '../../app.route';
-
+import { SessionService } from '../../core/services/session.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private sessionService: SessionService) { }
 
   hamburger: Boolean = false;
+  isLogged: Boolean = false;
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.sessionService.getIsLogged().subscribe(res => {
+      console.log(res);
+      this.isLogged = res;
+    });
+  }
 
-  public hamburgerAnimation() {
+  hamburgerAnimation() {
     this.hamburger = !this.hamburger;
   }
 
-  public goToLogin() {
+  goToLogin() {
     this.router.navigateByUrl('/' + AppRoute.LOGIN);
   }
 
-  public goToHome() {
+  goToHome() {
     this.router.navigateByUrl('/' + AppRoute.HOME);
+  }
+
+  logOut() {
+    this.sessionService.logOut();
+    this.goToLogin();
   }
 }

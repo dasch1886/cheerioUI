@@ -1,11 +1,20 @@
 @mixin flexJustifyAlgin($justify: center, $align: center) {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: $justify;
-  align-items: $align;
+  -webkit-box-pack: $justify;
+      -ms-flex-pack: $justify;
+          justify-content: $justify;
+  -webkit-box-align: $align;
+      -ms-flex-align: $align;
+          align-items: $align;
 }
 
 @mixin animationContainer($name) {
-  animation-name: $name;
-  animation-duration: 0.5s;
-  animation-timing-function: ease-out;
+  -webkit-animation-name: $name;
+          animation-name: $name;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
 }

@@ -19,5 +19,8 @@
         </a>
       </li>
     </ul>
+    <div class="nav__logout" *ngIf="isLogged" (click)="logOut()">
+        <i class="fas fa-sign-out-alt"></i>
+    </div>
   </div>
 </nav>

@@ -3,7 +3,7 @@ $formLabelFontSize: 14px;
 
 .registration__form {
   div {
-    &>span.form__label {
+    & > span.form__label {
       display: block;
       width: 100%;
       height: 100%;
@@ -12,7 +12,7 @@ $formLabelFontSize: 14px;
       font-size: $formLabelFontSize;
     }
 
-    &>input {
+    & > input {
       padding-left: 0px;
     }
   }
