@@ -10,6 +10,6 @@ export const units = {
   uri: '/units'
 };
 
-export const users= {
-  uri: '/users'
+export const user= {
+  uri: '/user'
 };
