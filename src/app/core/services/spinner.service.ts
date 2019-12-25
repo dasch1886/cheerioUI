@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, NavigationStart, NavigationCancel, NavigationError, NavigationEnd } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Event } from '@angular/router/src/events';
+import { Event } from '@angular/router/';
 
 @Injectable({
   providedIn: 'root'
