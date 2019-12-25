@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { server } from '../../../../environments/api-environment';
-import { users } from '../api-routes';
+import { user } from '../api-routes';
 import { LoginResponseModel } from '../../../shared/models/login-response.model';
 import { RegisterRequestModel } from '../../../shared/models/register-request.model';
-import { UserModel } from '../../../shared/models/user.model';
 import { SessionService } from '../../services/session.service';
-import { tap } from 'rxjs/operators';
+import { RegisterResponseModel } from 'src/app/shared/models/register-response.model';
+import { HeadersService } from '../headers/headers.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,23 +16,33 @@ import { tap } from 'rxjs/operators';
 export class UserService {
 
   constructor(private http: HttpClient,
-              private sessionService: SessionService) {
+    private sessionService: SessionService,
+    private headers: HeadersService) {
   }
 
   login(login: string, password: string): Observable<LoginResponseModel> {
     return this.http.get<LoginResponseModel>(
-      server.address + users.uri + '?nickname=' + login + '&password=' + password,
+      server.address + user.uri,
+      {
+        params: {
+          "login": login,
+          "password": password
+        }
+      }
     ).pipe(tap(token => {
       this.store(token);
       return token;
     }));
   }
 
-  register(user: RegisterRequestModel): Observable<HttpResponse<UserModel>> {
-    return this.http.post<UserModel>(
-      server.address + users.uri,
-      user,
-      { observe: 'response' }
+  register(data: RegisterRequestModel): Observable<HttpResponse<RegisterResponseModel>> {
+    return this.http.post<RegisterResponseModel>(
+      server.address + user.uri,
+      data,
+      {
+        headers: this.headers.getContentType('application/json'),
+        observe: 'response'
+      }
     );
   }
 
