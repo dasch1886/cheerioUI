@@ -10,11 +10,11 @@ const appRoutes: Routes = [
   },
   {
     path: AppRoute.HOME,
-    loadChildren: 'src/app/modules/home/home.module#HomeModule'
+    loadChildren: () => import('src/app/modules/home/home.module').then(m => m.HomeModule)
   },
   {
     path: AppRoute.LOGIN,
-    loadChildren: 'src/app/modules/login/login.module#LoginModule'
+    loadChildren: () => import('src/app/modules/login/login.module').then(m => m.LoginModule)
   }
 ];
 
