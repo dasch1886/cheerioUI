@@ -5,6 +5,7 @@ import { server } from "../../../../environments/api-environment";
 import { RecipeModel } from "../../../shared/models/recipe.model";
 import { recipes } from "../api-routes";
 import { HeadersService } from '../headers/headers.service';
+import { RecipesListModel } from '../../../shared/models/recipe-list.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class RecipeService {
     private headers: HeadersService) {
   }
 
-  findAll(): Observable<Array<RecipeModel>> {
-    return this.http.get<Array<RecipeModel>>(
+  findAll(): Observable<RecipesListModel> {
+    return this.http.get<RecipesListModel>(
       server.address + recipes.uri
     );
   }

@@ -1,9 +1,10 @@
-import { RecipeWithIngredientsService } from './../../core/http/recipe-with-ingredients/recipe-with-ingredients.service';
-import { RecipeService } from './../../core/http/recipe/recipe.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import AOS from 'aos';
-import { RecipeModel } from '../../shared/models/recipe.model';
 import { Observable, from } from 'rxjs';
+import { RecipeService } from './../../core/http/recipe/recipe.service';
+import { RecipesListModel } from '../../shared/models/recipe-list.model';
+import { RecipeModel } from 'src/app/shared/models/recipe.model';
+import { pluck } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -11,14 +12,16 @@ import { Observable, from } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  constructor(private recipeServiceWithIngredientsService: RecipeWithIngredientsService) { }
+  constructor(private recipeService: RecipeService) { }
 
-  recipes$: Observable<RecipeModel[]>;
-  categories$: Observable<string[]>;
-  tmp: boolean;
+  recipes$: Observable<RecipesListModel>
+  recipesListSize$: Observable<number>;
+  recipesArray$: Observable<Array<RecipeModel>>;
 
   ngOnInit() {
-    this.recipes$ = from(this.recipeServiceWithIngredientsService.findAll());
+    this.recipes$ = from(this.recipeService.findAll());
+    this.recipesArray$ = this.recipes$.pipe(pluck('recipes'));
+    this.recipesListSize$ = this.recipes$.pipe(pluck('listSize'));
   }
 
   ngAfterViewInit() {

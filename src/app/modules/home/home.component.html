@@ -5,46 +5,29 @@
         <input class="form-control search__input" type="text" placeholder="Entry recipe name">
         <i class="fas fa-search"></i>
       </div>
-      <ng-container *ngIf="(categories$ | async) as categories">
-        <div *ngFor="let category of categories">
-          <input type="checkbox" id={{category}}>
-          <label for="{{category}}">
-            {{category}}
-          </label>
-        </div>
-      </ng-container>
     </div>
   </section>
-  <ng-container *ngIf="(recipes$ | async) as recipes">
+
+  <ng-container *ngIf="(recipesArray$ | async) as recipes">
+
     <ng-container *ngFor="let recipe of recipes; let i=index; let even=even;">
+
       <div class="recipes__container" *ngIf="even && i<recipes.length-1 ">
-        <div class="recipe" data-aos="fade-right">
-          <span class="recipe__title" ellipsis>{{recipes[i].name}}</span>
-          <div class="recipe__desc" ellipsis>{{recipes[i].description}}</div>
-          <div class="recipe__components">
-            <span>Składniki :</span>
-            <ul>
-              <li *ngFor="let item of recipes[i].components">
-                {{item}}
-              </li>
-            </ul>
-          </div>
-          <button class="recipe__show">More</button>
-        </div>
-        <div class="recipe" data-aos="fade-left" *ngIf="i+1<recipes.length">
-          <span class="recipe__title" ellipsis>{{recipes[i+1].name}}</span>
-          <div class="recipe__desc" ellipsis>{{recipes[i+1].description}}</div>
-          <div class="recipe__components">
-            <span>Składniki :</span>
-            <ul>
-              <li *ngFor="let item of recipes[i+1].recipeIngredientSet">
-                {{item.ingredient.name}}
-              </li>
-            </ul>
-          </div>
-          <button class="recipe__show">More</button>
-        </div>
+
+        <app-mini-recipe data-aos="fade-right" id={{recipes[i].id}}
+          name={{recipes[i].name}} desc={{recipes[i].desc}}
+          author={{recipes[i].author}} imgPath={{recipes[i].imgPath}}>
+        </app-mini-recipe>
+
+        <app-mini-recipe data-aos="fade-left" *ngIf="i+1<recipes.length"
+          id={{recipes[i+1].id}} name={{recipes[i+1].name}}
+          desc={{recipes[i+1].desc}} author={{recipes[i+1].author}}
+          imgPath={{recipes[i+1].imgPath}}>
+        </app-mini-recipe>
+
       </div>
+
     </ng-container>
+
   </ng-container>
 </main>

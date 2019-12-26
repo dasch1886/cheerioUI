@@ -8,15 +8,15 @@ import { RecipeModel } from 'src/app/shared/models/recipe.model';
 export class RecipeWithIngredientsService {
     constructor(private ingredientService: IngredientService, private recipeService: RecipeService) {
     }
-    async findAll(): Promise<RecipeModel[]> {
-        const ingredients = await this.ingredientService.findAll().toPromise();
-        const recipes = await this.recipeService.findAll().toPromise();
-        return recipes.map(recipe => {
-            recipe.recipeIngredientSet = recipe.recipeIngredientSet.map(ingredient => {
-                ingredient.ingredient = ingredients.find(ing => ing.id === ingredient.ingredientId);
-                return ingredient;
-            })
-            return recipe;
-        });
-    }
+    // async findAll(): Promise<RecipeModel[]> {
+    //     const ingredients = await this.ingredientService.findAll().toPromise();
+    //     const recipes = await this.recipeService.findAll().toPromise();
+    //     return recipes.map(recipe => {
+    //         recipe.recipeIngredientSet = recipe.recipeIngredientSet.map(ingredient => {
+    //             ingredient.ingredient = ingredients.find(ing => ing.id === ingredient.ingredientId);
+    //             return ingredient;
+    //         })
+    //         return recipe;
+    //     });
+    // }
 }

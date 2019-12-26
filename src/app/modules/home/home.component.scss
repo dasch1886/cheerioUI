@@ -1,4 +1,4 @@
-@import './styles/variable.scss';
+@import "./styles/variable.scss";
 
 main {
   min-height: 100%;
@@ -95,7 +95,7 @@ main {
     flex-flow: column;
   }
 
-  &:nth-child(2n + 1) > .recipe {
+  & > app-mini-recipe:nth-child(2n + 1) {
     &:first-child {
       padding-right: 100px;
 
@@ -105,7 +105,7 @@ main {
     }
   }
 
-  &:nth-child(2n) > .recipe {
+  & > app-mini-recipe:nth-child(2n) {
     &:last-child {
       padding-left: 100px;
 
@@ -115,12 +115,12 @@ main {
     }
   }
 
-  & > .recipe {
+  & > app-mini-recipe {
     min-height: calc(100vh - 46px);
     position: relative;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       height: 100%;
@@ -151,7 +151,7 @@ main {
         }
       }
 
-      .recipe__show {
+      app-mini-recipe.recipe__show > button {
         margin-right: 50px;
 
         @media screen and (max-width: 992px) {
@@ -184,7 +184,7 @@ main {
 
   // even recipes__container
   @media screen and (min-width: 993px) {
-    &:nth-child(2n) > .recipe {
+    &:nth-child(2n) > app-mini-recipe {
       &:first-child {
         width: calc(50% - 50px);
         z-index: 3;
@@ -197,7 +197,7 @@ main {
           border-bottom: 200vh solid $recipeContainerEveBg;
         }
 
-        .recipe__show {
+        app-mini-recipe.recipe__show > button {
           margin-right: 0px;
         }
       }
@@ -213,60 +213,6 @@ main {
           border-bottom: none;
         }
       }
-    }
-  }
-}
-
-.recipe {
-  padding: 20px;
-  font-family: $titleFont;
-
-  &__title {
-    display: block;
-    width: 100%;
-    font-size: 26px;
-    text-align: center;
-    font-weight: bold;
-  }
-
-  &__desc {
-    max-height: 280px;
-    padding: 20px 0px;
-    font-size: 20px;
-    text-align: justify;
-  }
-
-  &__components {
-    span {
-      display: block;
-      height: 40px;
-      width: 100%;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    ul {
-      min-height: 140px;
-      margin: 0px;
-      padding-top: 20px;
-      font-size: 20px;
-      overflow: hidden;
-    }
-  }
-
-  &__show {
-    float: right;
-    height: 30px;
-    padding: 0px 20px;
-    background-color: $buttonBg;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    color: $buttonFontColor;
-    transition: all 1s;
-
-    &:hover {
-      background-color: $buttonBgHover;
     }
   }
 }
