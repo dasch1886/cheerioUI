@@ -6,9 +6,10 @@ import { SharedModule } from '../../shared/shared.module';
 import { AddRecipeComponent } from './pages/add-recipe/add-recipe.component';
 import { ErrorService } from './pages/add-recipe/sevices/errors/error.service';
 import { MiniRecipeComponent } from './pages/mini-recipe/mini-recipe.component';
+import { RecipeDetailsComponent } from './pages/recipe-details/recipe-details.component';
 
 @NgModule({
-  declarations: [HomeComponent, AddRecipeComponent, MiniRecipeComponent],
+  declarations: [HomeComponent, AddRecipeComponent, MiniRecipeComponent, RecipeDetailsComponent],
   imports: [
     HomeRoutingModule,
     SharedModule,
