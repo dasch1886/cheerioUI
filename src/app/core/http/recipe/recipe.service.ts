@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpResponse } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { server } from "../../../../environments/api-environment";
-import { RecipeModel } from "../../../shared/models/recipe.model";
-import { recipes } from "../api-routes";
-import { HeadersService } from '../headers/headers.service';
-import { RecipesListModel } from '../../../shared/models/recipe-list.model';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {server} from '../../../../environments/api-environment';
+import {RecipeModel} from '../../../shared/models/recipe.model';
+import {recipes, recipe} from '../api-routes';
+import {HeadersService} from '../headers/headers.service';
+import {RecipesListModel} from '../../../shared/models/recipe-list.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ import { RecipesListModel } from '../../../shared/models/recipe-list.model';
 export class RecipeService {
 
   constructor(private http: HttpClient,
-    private headers: HeadersService) {
+              private headers: HeadersService) {
   }
 
   findAll(): Observable<RecipesListModel> {
@@ -22,10 +22,10 @@ export class RecipeService {
     );
   }
 
-  create(recipe: RecipeModel): Observable<HttpResponse<RecipeModel>> {
+  create(recipeData: RecipeModel): Observable<HttpResponse<RecipeModel>> {
     return this.http.post<RecipeModel>(
       server.address + recipes.uri,
-      recipe,
+      recipeData,
       {
         headers: this.headers.getContentType('application/json'),
         observe: 'response'
@@ -33,4 +33,14 @@ export class RecipeService {
     );
   }
 
+  getDetails(id: string): Observable<RecipeModel> {
+    return this.http.get<RecipeModel>(
+      server.address + recipe.uri,
+      {
+        params: {
+          'id': id
+        }
+      }
+    );
+  }
 }
