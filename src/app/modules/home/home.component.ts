@@ -14,7 +14,7 @@ import { pluck } from 'rxjs/operators';
 export class HomeComponent implements OnInit, AfterViewInit {
   constructor(private recipeService: RecipeService) { }
 
-  recipes$: Observable<RecipesListModel>
+  recipes$: Observable<RecipesListModel>;
   recipesListSize$: Observable<number>;
   recipesArray$: Observable<Array<RecipeModel>>;
 
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     AOS.init({
-      delay: 500,
+      delay: 100,
       duration: 1000,
       easing: 'ease-out',
       mirror: true
