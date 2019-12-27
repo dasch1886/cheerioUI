@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { server } from 'src/environments/api-environment';
+import {Component, OnInit, Input} from '@angular/core';
+import {server} from 'src/environments/api-environment';
+import {Router} from '@angular/router';
+import {HomeRoute} from '../../home.route';
 
 @Component({
   selector: 'app-mini-recipe',
@@ -9,9 +11,10 @@ import { server } from 'src/environments/api-environment';
 
 export class MiniRecipeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) {
+  }
 
-  private imgPrefix: string = `${server.address}/public/`;
+  private imgPrefix = `${server.address}/public/`;
 
   @Input() id: string;
   @Input() name: string;
@@ -24,7 +27,7 @@ export class MiniRecipeComponent implements OnInit {
   }
 
   showRecipeDetails() {
-
+    this.router.navigate([`${this.router.url}/${HomeRoute.RECIPE_DETAILS}`, this.id]);
   }
 
 }
