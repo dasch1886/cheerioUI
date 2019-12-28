@@ -1,10 +1,13 @@
 <main>
   <section class="search__container">
     <div>
+      <form [formGroup]="filterGroup">
       <div class="input__container">
-        <input class="form-control search__input" type="text" placeholder="Entry recipe name">
+          <input formControlName="text" class="form-control search__input" type="text" placeholder="Entry recipe name"
+            (input)="filterRecipes()">
         <i class="fas fa-search"></i>
       </div>
+      </form>
     </div>
   </section>
 
