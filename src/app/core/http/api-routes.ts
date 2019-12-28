@@ -17,3 +17,7 @@ export const units = {
 export const user = {
   uri: '/user'
 };
+
+export const filter = {
+  uri: '/filter'
+};
