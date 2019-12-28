@@ -1,0 +1,146 @@
+@import "../../styles/variable.scss";
+
+.app-recipe-details {
+  display: flex;
+  font-family: $titleFont;
+  font-size: 22px;
+  color: $recipeDetailsFontColor;
+
+  @media screen and (max-width: 1250px) {
+    flex-flow: column;
+  }
+
+  @media screen and (max-width: 992px) {
+    font-size: 18px;
+  }
+}
+
+
+.recipe__container {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+  &--general {
+    width: 60%;
+
+    @media screen and (max-width: 1250px) {
+      width: 100%;
+    }
+  }
+
+  &--ingredients {
+    justify-content: flex-start;
+    width: 40%;
+
+    @media screen and (max-width: 1250px) {
+      width: 100%;
+    }
+  }
+
+}
+
+.recipe {
+  &__name {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  &__img > img {
+    width: 100%;
+  }
+
+  &__desc {
+    margin: 20px;
+  }
+
+  &__author {
+    width: 100%;
+    padding: 0 20px;
+    padding-right: 60px;
+    text-align: right;
+  }
+}
+
+.header {
+  margin: 10px;
+}
+
+.ingredient {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 5px 20px;
+
+  &__unit {
+    margin-left: 5px;
+  }
+}
+
+.comments__container {
+  width: 100%;
+  padding: 20px;
+
+  .header {
+    margin: 10px 0;
+  }
+
+  .comments__list {
+    width: 100%;
+    margin: 20px 0;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .comment {
+    margin: 15px 0;
+    .comment__author {
+      font-size: 20px;
+      font-weight: bold;
+
+      @media screen and (max-width: 992px) {
+        font-size: 18px;
+      }
+    }
+
+    .comment__value {
+      font-size: 16px;
+    }
+  }
+
+  .adding__comment {
+    .text {
+      width: 100%;
+      padding: 5px 10px;
+      border: 1px solid $commentTextareaBorder;
+      font-size: 16px;
+      min-height: 90px;
+
+      &:focus {
+        outline: 1px solid $commentTextareaFocusBorder;
+      }
+    }
+
+    .btn__comment {
+      width: 100%;
+      text-align: right;
+
+      & > button {
+        height: 44px;
+        width: 44px;
+        background-color: $buttonBg;
+        border: none;
+        cursor: pointer;
+        color: white;
+
+        &:hover {
+          background: $buttonBgHover;
+        }
+      }
+    }
+  }
+}

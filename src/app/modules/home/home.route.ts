@@ -1,3 +1,4 @@
 export enum HomeRoute {
-  ADD = 'add'
+  ADD = 'add',
+  RECIPE_DETAILS = 'recipeDetails',
 }

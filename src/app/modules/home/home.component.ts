@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private preloader: SpinnerService) { }
 
-  recipes$: Observable<RecipesListModel>
+  recipes$: Observable<RecipesListModel>;
   recipesListSize$: Observable<number>;
   recipesArray$: Observable<Array<RecipeModel>>;
   private filterGroup: FormGroup;
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     AOS.init({
-      delay: 500,
+      delay: 100,
       duration: 1000,
       easing: 'ease-out',
       mirror: true

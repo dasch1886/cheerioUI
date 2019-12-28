@@ -4,8 +4,12 @@ $mainBgGradient: linear-gradient(to bottom right, #e7e0da, #854924, #363334);
 $searchContainerBg: #76a748;
 
 $recipeContainerOddBg: rgba(255, 255, 255, 0.5);
-$recipeContainerEveBg: rgba(113, 114, 113, 1);
+$recipeContainerEveBg: rgba(113, 114, 113, 0.85);
 $titleFont: 'ZCOOL XiaoWei', serif;
 $buttonFontColor: #ffffff;
 $buttonBg: #57941e;
 $buttonBgHover: #63a724;
+$recipeDetailsFontColor: #63a724;
+
+$commentTextareaBorder: #57941e;
+$commentTextareaFocusBorder: #63a724;

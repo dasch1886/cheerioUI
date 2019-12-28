@@ -17,13 +17,13 @@
 
       <div class="recipes__container" *ngIf="even && i<recipes.length-1 ">
 
-        <app-mini-recipe data-aos="fade-right" id={{recipes[i].id}}
+        <app-mini-recipe data-aos="fade-right" id={{recipes[i]._id}}
           name={{recipes[i].name}} desc={{recipes[i].desc}}
           author={{recipes[i].author}} imgPath={{recipes[i].imgPath}}>
         </app-mini-recipe>
 
         <app-mini-recipe data-aos="fade-left" *ngIf="i+1<recipes.length"
-          id={{recipes[i+1].id}} name={{recipes[i+1].name}}
+          id={{recipes[i+1]._id}} name={{recipes[i+1].name}}
           desc={{recipes[i+1].desc}} author={{recipes[i+1].author}}
           imgPath={{recipes[i+1].imgPath}}>
         </app-mini-recipe>

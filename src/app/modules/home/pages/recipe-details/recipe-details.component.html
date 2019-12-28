@@ -1,0 +1,45 @@
+<div class="app-recipe-details">
+  <ng-container *ngIf="(recipe$ | async) as recipe">
+    <section class="recipe__container recipe__container--general">
+      <span class="recipe__name">{{recipe.name}}</span>
+      <div class="recipe__img">
+        <img src="{{imgPrefix}}{{recipe.imgPath}}" alt="picture">
+      </div>
+      <span class="recipe__desc">{{recipe.desc}}</span>
+      <div class="recipe__author">{{recipe.author}}</div>
+    </section>
+    <section class="recipe__container recipe__container--ingredients">
+      <span class="header">Ingredients</span>
+      <ng-container *ngFor="let ingredient of recipe.ingredients;">
+        <div class="ingredient">
+          <span class="ingredient__name">{{ingredient.name}}</span>
+          <span class="ingredient__amount">
+            <span>{{ingredient.amount}}</span>
+            <span class="ingredient__unit">{{ingredient.unitName}}</span>
+          </span>
+        </div>
+      </ng-container>
+      <div class="comments__container">
+        <div class="header">Comments ({{recipe.comments.length}})</div>
+        <div class="comments__list">
+          <ng-container *ngFor="let comment of recipe.comments;">
+            <div class="comment">
+              <div class="comment__author">{{comment.author}}</div>
+              <div class="comment__value">{{comment.value}}</div>
+            </div>
+          </ng-container>
+        </div>
+        <div class="adding__comment">
+          <textarea class="text" placeholder="Entry comment"></textarea>
+          <div class="btn__comment">
+            <button>
+              <i class="far fa-comment"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+</div>
+
+

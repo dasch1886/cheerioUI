@@ -3,9 +3,10 @@ import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { server } from "../../../../environments/api-environment";
 import { RecipeModel } from "../../../shared/models/recipe.model";
-import { recipes, filter } from "../api-routes";
+import { recipes, recipe, filter } from "../api-routes";
 import { HeadersService } from '../headers/headers.service';
 import { RecipesListModel } from '../../../shared/models/recipe-list.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +23,10 @@ export class RecipeService {
     );
   }
 
-  create(recipe: RecipeModel): Observable<HttpResponse<RecipeModel>> {
+  create(recipeData: RecipeModel): Observable<HttpResponse<RecipeModel>> {
     return this.http.post<RecipeModel>(
       server.address + recipes.uri,
-      recipe,
+      recipeData,
       {
         headers: this.headers.getContentType('application/json'),
         observe: 'response'
@@ -40,5 +41,16 @@ export class RecipeService {
         text: text
       }
     });
+  }
+
+  getDetails(id: string): Observable<RecipeModel> {
+    return this.http.get<RecipeModel>(
+      server.address + recipe.uri,
+      {
+        params: {
+          'id': id
+        }
+      }
+    );
   }
 }

@@ -1,9 +1,12 @@
-import {RecipeIngredientModel} from "./recipe-ingredient.model";
+import {RecipeIngredientModel} from './recipe-ingredient.model';
+import {CommentModel} from './comment.model';
 
 export interface RecipeModel {
-  id?: string;
+  _id?: string;
   name: string;
   author: string;
-  description: string;
-  recipeIngredientSet: Array<RecipeIngredientModel>
+  desc: string;
+  ingredients: Array<RecipeIngredientModel>;
+  imgPath: string;
+  comments: Array<CommentModel>;
 }
