@@ -1,7 +1,7 @@
 @import "./styles/variable.scss";
 
 main {
-  min-height: 100%;
+  min-height: 100vh;
   background: url($mainBgUrl) no-repeat center center fixed;
   background-size: 100vw 100vh;
 }
