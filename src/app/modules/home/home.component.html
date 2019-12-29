@@ -2,12 +2,23 @@
   <section class="search__container">
     <div>
       <form [formGroup]="filterGroup">
-      <div class="input__container">
-          <input formControlName="text" class="form-control search__input" type="text" placeholder="Entry recipe name, author or description"
-            (input)="filterRecipes()">
-        <i class="fas fa-search"></i>
-      </div>
+        <div class="input__container">
+          <input formControlName="text" class="form-control search__input" type="text"
+            placeholder="Entry recipe name, author or description" (input)="filterRecipes()">
+          <i class="fas fa-search"></i>
+        </div>
       </form>
+      <div class="search__advanced">
+        <app-autocomplete-input [events]="eventsSubject.asObservable()" (sendValue)="getValue($event)" name="author" [array]="authors"></app-autocomplete-input>
+        <app-autocomplete-input [events]="eventsSubject.asObservable()" (sendValue)="getValue($event)" name="ingredient" [array]="ingredients"></app-autocomplete-input>
+        <button class="adding__ingredient" (click)="getIngredient()">
+          <i class="fas fa-angle-double-right"></i>
+        </button>
+        <div class="ingredients" *ngFor="let ingredient of ingrdeintsToFilter">
+          <div>{{ingredient}}</div>
+          <i class="far fa-times-circle ingredient__remove"></i>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -17,14 +28,12 @@
 
       <div class="recipes__container" *ngIf="even && i<recipes.length">
 
-        <app-mini-recipe data-aos="fade-right" id={{recipes[i]._id}}
-          name={{recipes[i].name}} desc={{recipes[i].desc}}
+        <app-mini-recipe data-aos="fade-right" id={{recipes[i]._id}} name={{recipes[i].name}} desc={{recipes[i].desc}}
           author={{recipes[i].author}} imgPath={{recipes[i].imgPath}}>
         </app-mini-recipe>
 
-        <app-mini-recipe data-aos="fade-left" *ngIf="i+1<recipes.length"
-          id={{recipes[i+1]._id}} name={{recipes[i+1].name}}
-          desc={{recipes[i+1].desc}} author={{recipes[i+1].author}}
+        <app-mini-recipe data-aos="fade-left" *ngIf="i+1<recipes.length" id={{recipes[i+1]._id}}
+          name={{recipes[i+1].name}} desc={{recipes[i+1].desc}} author={{recipes[i+1].author}}
           imgPath={{recipes[i+1].imgPath}}>
         </app-mini-recipe>
 

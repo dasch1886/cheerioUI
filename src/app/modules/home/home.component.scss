@@ -68,7 +68,7 @@ main {
   position: relative;
   width: 50%;
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 992px) {
     width: 100%;
   }
 
@@ -81,6 +81,47 @@ main {
     color: #76a748;
     transition: color 0.5s;
     cursor: pointer;
+  }
+}
+
+.search__advanced {
+  display: flex;
+  align-items: center;
+
+  & > app-autocomplete-input {
+    margin-right: 10px;
+  }
+
+  & > .adding__ingredient {
+    margin-right: 10px;
+    height: 38px;
+    padding: 0px 20px;
+    background-color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 20px;
+    color: $buttonBg;
+    transition: all 1s;
+
+    &:hover {
+      color: $buttonBgHover;
+    }
+  }
+
+  & > .ingredients {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    color: white;
+    height: 38px;
+
+    i.ingredient__remove {
+      color: red;
+      cursor: pointer;
+      font-size: 20px;
+      margin-left: 5px;
+    }
   }
 }
 
