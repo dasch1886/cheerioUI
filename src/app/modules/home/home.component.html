@@ -3,7 +3,7 @@
     <div>
       <form [formGroup]="filterGroup">
       <div class="input__container">
-          <input formControlName="text" class="form-control search__input" type="text" placeholder="Entry recipe name"
+          <input formControlName="text" class="form-control search__input" type="text" placeholder="Entry recipe name, author or description"
             (input)="filterRecipes()">
         <i class="fas fa-search"></i>
       </div>
@@ -15,7 +15,7 @@
 
     <ng-container *ngFor="let recipe of recipes; let i=index; let even=even;">
 
-      <div class="recipes__container" *ngIf="even && i<recipes.length-1 ">
+      <div class="recipes__container" *ngIf="even && i<recipes.length">
 
         <app-mini-recipe data-aos="fade-right" id={{recipes[i]._id}}
           name={{recipes[i].name}} desc={{recipes[i].desc}}

@@ -147,11 +147,11 @@ export class AddRecipeComponent implements OnInit {
       description: this.recipeGroup.get('desc').value,
       recipeIngredientSet: this.recipeGroup.get('ingredients').value
     };
-    this.recipeService.create(recipe).subscribe(res => {
-      console.log(res);
-      alert('Recipe has been added');
-    });
-    console.log(this.recipeGroup.value);
+    // this.recipeService.create(recipe).subscribe(res => {
+    //   console.log(res);
+    //   alert('Recipe has been added');
+    // });
+    // console.log(this.recipeGroup.value);
 
   }
 }
