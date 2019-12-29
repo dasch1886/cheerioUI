@@ -29,17 +29,20 @@
             </div>
           </ng-container>
         </div>
-        <div class="adding__comment">
-          <textarea class="text" placeholder="Entry comment"></textarea>
-          <div class="btn__comment">
-            <button>
-              <i class="far fa-comment"></i>
-            </button>
-          </div>
+        <div class="comment__validation" *ngIf="!commentValid">
+          Comment have to has minimum 5 characters
         </div>
+        <form [formGroup]="commentGroup">
+          <div class="adding__comment">
+            <textarea class="text" placeholder="Entry comment" formControlName="value"></textarea>
+            <div class="btn__comment">
+              <button (click)="addComment()">
+                <i class="far fa-comment"></i>
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </section>
   </ng-container>
 </div>
-
-

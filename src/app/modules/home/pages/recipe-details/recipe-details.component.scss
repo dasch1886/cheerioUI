@@ -15,7 +15,6 @@
   }
 }
 
-
 .recipe__container {
   display: flex;
   flex-flow: column;
@@ -39,7 +38,6 @@
       width: 100%;
     }
   }
-
 }
 
 .recipe {
@@ -50,8 +48,14 @@
     padding: 10px;
   }
 
-  &__img > img {
-    width: 100%;
+  &__img {
+    padding: 20px;
+
+    & > img {
+      max-width: 700px;
+      max-height: 500px;
+      width: 100%;
+    }
   }
 
   &__desc {
@@ -109,6 +113,12 @@
 
     .comment__value {
       font-size: 16px;
+    }
+
+    &__validation {
+      padding-bottom: 5px;
+      font-size: 16px;
+      color: red;
     }
   }
 
