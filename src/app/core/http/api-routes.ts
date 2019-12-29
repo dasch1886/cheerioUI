@@ -25,3 +25,7 @@ export const filter = {
 export const comment = {
   uri: '/comment'
 }
+
+export const authors = {
+  uri: '/authors'
+}
