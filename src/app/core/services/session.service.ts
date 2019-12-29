@@ -20,7 +20,12 @@ export class SessionService {
 
   isAuthenticated(): boolean {
     const token: LoginResponseModel = JSON.parse(localStorage.getItem('token'));
-    return token != null && !this.jwtHelper.isTokenExpired(token.access_token);
+    if (token != null && !this.jwtHelper.isTokenExpired(token.access_token)) {
+      return true;
+    }
+
+    localStorage.removeItem('token');
+    return false;
   }
 
   getIsLogged(): Observable<boolean> {
@@ -38,6 +43,7 @@ export class SessionService {
     if (token !== null) {
       return token.nickname;
     } else {
+      alert('You have to been logged');
       this.router.navigateByUrl(AppRoute.LOGIN);
       return undefined;
     }
