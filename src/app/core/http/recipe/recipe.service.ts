@@ -3,9 +3,11 @@ import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { server } from "../../../../environments/api-environment";
 import { RecipeModel } from "../../../shared/models/recipe.model";
-import { recipes, recipe, filter } from "../api-routes";
+import { recipes, recipe, filter, comment } from "../api-routes";
 import { HeadersService } from '../headers/headers.service';
 import { RecipesListModel } from '../../../shared/models/recipe-list.model';
+import { CommentModel } from "src/app/shared/models/comment.model";
+import { CommentResponseModel } from "src/app/shared/models/comment-response.model";
 
 
 @Injectable({
@@ -46,6 +48,28 @@ export class RecipeService {
   getDetails(id: string): Observable<RecipeModel> {
     return this.http.get<RecipeModel>(
       server.address + recipe.uri,
+      {
+        params: {
+          'id': id
+        }
+      }
+    );
+  }
+
+  setComment(data: CommentModel): Observable<HttpResponse<CommentResponseModel>> {
+    return this.http.post<CommentResponseModel>(
+      server.address + recipe.uri + comment.uri,
+      data,
+      {
+        headers: this.headers.getContentType('application/json'),
+        observe: 'response'
+      }
+    );
+  }
+
+  getComments(id: string): Observable<Array<CommentModel>> {
+    return this.http.get<Array<CommentModel>>(
+      server.address + recipe.uri + comment.uri,
       {
         params: {
           'id': id
