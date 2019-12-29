@@ -1,0 +1,13 @@
+<div class="autocomplete__container">
+  <form [formGroup]="searchGroup">
+    <input class="form-control autocomplete__input" type="text" placeholder="{{name}}"
+    formControlName="search"
+    appClickOutside (clickOutside)="setDropdown(false)" (focus)="setDropdown(true)"
+     >
+  </form>
+  <div class="autocomplete__dropdown" *ngIf="(showDropdown && array.length!==0)">
+    <div (click)="selectValue(item)" *ngFor="let item of array | searchFilter: getSearchValue()">
+      {{item}}
+    </div>
+  </div>
+</div>
