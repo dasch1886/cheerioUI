@@ -17,8 +17,7 @@ export class IngredientService {
 
   findAll(): Observable<Array<IngredientModel>> {
     return this.http.get<Array<IngredientModel>>(
-      server.address + ingredients.uri,
-      { headers: this.headers.getContentType('application/json') },
+      server.address + ingredients.uri
     );
   }
 
