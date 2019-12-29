@@ -21,3 +21,7 @@ export const user = {
 export const filter = {
   uri: '/filter'
 };
+
+export const comment = {
+  uri: '/comment'
+}
