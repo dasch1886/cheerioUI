@@ -8,12 +8,12 @@
   &__input {
     display: block;
     margin-right: 10px;
-    border-radius: 0.25rem 0.25rem 0 0;
 
     &:focus {
       border-color: transparent;
       box-shadow: 0 -0.1rem 0 0.2rem rgba(113, 114, 113, 0.25);
       transition: 0.5s all ease-out;
+      border-radius: 0.25rem 0.25rem 0 0;
 
       & + .fas {
         color: #717271;

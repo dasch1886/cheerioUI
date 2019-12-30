@@ -92,7 +92,7 @@ main {
     margin-right: 10px;
   }
 
-  & > .adding__ingredient {
+  & > .adding__ingredient, .find {
     margin-right: 10px;
     height: 38px;
     padding: 0px 20px;
@@ -113,14 +113,18 @@ main {
     display: flex;
     align-items: center;
     padding: 0 10px;
-    color: white;
+    color: $buttonBg;
     height: 38px;
+    background-color: white;
+    font-weight: bold;
+    border-radius: 0.25rem;
+    margin-right: 10px;
 
     i.ingredient__remove {
-      color: red;
+      color: #717271;
       cursor: pointer;
       font-size: 20px;
-      margin-left: 5px;
+      margin-left: 10px;
     }
   }
 }
