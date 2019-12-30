@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Observable } from 'rxjs';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {FormGroup, FormBuilder} from '@angular/forms';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-autocomplete-input',
@@ -9,7 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class AutocompleteInputComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+  }
 
   showDropdown: boolean = false;
   searchGroup: FormGroup;
@@ -34,11 +35,14 @@ export class AutocompleteInputComponent implements OnInit {
   }
 
   setDropdown(value: boolean) {
+    if (value) {
+      this.searchGroup.patchValue({search: ''});
+    }
     this.showDropdown = value;
   }
 
   selectValue(value) {
-    this.searchGroup.patchValue({ search: value });
+    this.searchGroup.patchValue({search: value});
     this.setDropdown(false);
   }
 
@@ -47,9 +51,16 @@ export class AutocompleteInputComponent implements OnInit {
   }
 
   emitSearchedValue() {
-    this.sendValue.emit({
-      name: this.name,
-      value: this.searchGroup.value.search
-    });
+    if (this.array.indexOf(this.searchGroup.value.search) !== -1) {
+      this.sendValue.emit({
+        name: this.name,
+        value: this.searchGroup.value.search
+      });
+    } else {
+      this.sendValue.emit({
+        name: this.name,
+        value: ''
+      });
+    }
   }
 }
