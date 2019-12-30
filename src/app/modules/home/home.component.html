@@ -14,10 +14,13 @@
         <button class="adding__ingredient" (click)="getIngredient()">
           <i class="fas fa-angle-double-right"></i>
         </button>
-        <div class="ingredients" *ngFor="let ingredient of ingrdeintsToFilter">
+        <div class="ingredients" *ngFor="let ingredient of ingredientsToFilter">
           <div>{{ingredient}}</div>
-          <i class="far fa-times-circle ingredient__remove"></i>
+          <i class="far fa-times-circle ingredient__remove" (click)="removeIngredient(ingredient)"></i>
         </div>
+        <button class="find" (click)="searchingAdvanced()">
+          <i class="fab fa-searchengin"></i>
+        </button>
       </div>
     </div>
   </section>
