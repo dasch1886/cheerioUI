@@ -4,6 +4,7 @@ import {HomeComponent} from './home.component';
 import {HomeRoute} from './home.route';
 import {AddRecipeComponent} from './pages/add-recipe/add-recipe.component';
 import {RecipeDetailsComponent} from './pages/recipe-details/recipe-details.component';
+import { RoleGuardService } from 'src/app/core/guards/role-guard.service';
 
 const homeRoutes: Routes = [
   {
@@ -13,7 +14,8 @@ const homeRoutes: Routes = [
   },
   {
     path: HomeRoute.ADD,
-    component: AddRecipeComponent
+    component: AddRecipeComponent,
+    canActivate: [RoleGuardService]
   },
   {
     path: `${HomeRoute.RECIPE_DETAILS}/:id`,

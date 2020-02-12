@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppRoute } from '../../app.route';
 import { SessionService } from '../../core/services/session.service';
+import { HomeRoute } from 'src/app/modules/home/home.route';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -31,6 +32,10 @@ export class NavbarComponent implements OnInit {
 
   goToHome() {
     this.router.navigateByUrl('/' + AppRoute.HOME);
+  }
+
+  goToAdd() {
+    this.router.navigateByUrl('/' + AppRoute.HOME + '/' + HomeRoute.ADD);
   }
 
   logOut() {

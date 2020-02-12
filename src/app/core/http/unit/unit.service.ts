@@ -18,7 +18,12 @@ export class UnitService {
   findAll(): Observable<Array<UnitModel>> {
     return this.http.get<Array<UnitModel>>(
       server.address + units.uri,
-      { headers: this.headers.getContentType('application/json') },
+      {
+        headers: this.headers.getContentType('application/json', true),
+        params: {
+          nickname: this.headers.getNickname()
+        }
+      },
     );
   }
 

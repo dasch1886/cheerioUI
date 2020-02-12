@@ -18,6 +18,16 @@
           Login
         </a>
       </li>
+      <li>
+        <a class="nav__link" (click)="goToAdd()">
+          Add
+        </a>
+      </li>
+      <li>
+        <a class="nav__link" (click)="goToAdd()">
+          Favourites
+        </a>
+      </li>
     </ul>
     <div class="nav__logout" *ngIf="isLogged" (click)="logOut()">
         <i class="fas fa-sign-out-alt"></i>

@@ -7,6 +7,8 @@ export interface RecipeModel {
   author: string;
   desc: string;
   ingredients: Array<RecipeIngredientModel>;
-  imgPath: string;
-  comments: Array<CommentModel>;
+  imgPath?: string;
+  comments?: Array<CommentModel>;
+  difficultyLvel?: string;
+  executionTime?: number;
 }

@@ -1,4 +1,4 @@
-@import './styles/variables.scss';
+@import "./styles/variables.scss";
 
 .add__container {
   min-height: 100vh;
@@ -8,15 +8,9 @@
   position: relative;
   color: $mainColor;
   font-size: $mainFontSize;
-  display: flex;
-  flex-flow: row;
-
-  @media only screen and (max-width: 767px) {
-    flex-flow: column;
-  }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     bottom: 0;
@@ -26,10 +20,18 @@
     opacity: 0.4;
   }
 
+  .wrapper {
+    display: flex;
+    flex-flow: row;
+
+    @media only screen and (max-width: 767px) {
+      flex-flow: column;
+    }
+  }
+
   .result__container {
     background-color: rgba(255, 255, 255, 0.75);
     font-family: $recipeFont;
-    margin: 10px;
     padding: 10px;
     color: #000000;
   }
@@ -38,10 +40,12 @@
 .result__container {
   .recipe__ingredients {
     list-style: none;
-    padding-top: 10px;
-    margin: 0px;
+    padding: 10px 0;
+    margin: 0;
 
     .fa-times-circle {
+      margin-left: 40px;
+      margin-right: 20px;
       cursor: pointer;
       color: $timesColor;
       transition: 0.5s all;
@@ -50,6 +54,11 @@
         color: $timesColorHover;
         transition: 0.5s color;
       }
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
     }
   }
 }
@@ -65,6 +74,7 @@
     font-size: 18px;
     padding: 10px 0px;
     margin: 0;
+    overflow-wrap: break-word;
   }
 
   .recipe__select,
@@ -81,7 +91,7 @@
   }
 
   .recipe__button {
-    margin-top: 15px;
+    height: 38px;
     background-color: $buttonColor;
     border: none;
     transition: 0.5s background-color;
@@ -92,22 +102,23 @@
     }
   }
 
-  .scrollable__select {
-    height: 120px;
-    overflow: auto;
-  }
-
   .recipe__select {
     overflow-y: auto;
 
     & > option {
       background-color: $optionColorHover;
     }
+  }
 
-    & + .fa-plus-circle {
-      font-size: 40px;
-      color: $buttonColorLighter;
-      cursor: pointer;
+  .fa-plus-circle {
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.5s color;
+
+    &:hover {
+      color: #57941e;
+      transition: 0.5s color;
     }
   }
 
@@ -130,3 +141,111 @@
     transition: 0.5s all ease-out;
   }
 }
+
+app-autocomplete-input {
+  display: block;
+  width: 100%;
+  color: #000000;
+  font-size: 16px;
+
+  ::ng-deep .autocomplete__container {
+    width: 100%;
+  }
+
+  ::ng-deep .autocomplete__dropdown {
+    max-height: 136px;
+  }
+}
+
+.ingredient__add {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.ingredients__add,
+.units__add,
+.quantity__add,
+.button__container,
+.executionTime__container,
+.diffLevel__container {
+  display: inline-block;
+  width: 50%;
+
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+.ingredients__add,
+.quantity__add,
+.executionTime__container {
+  padding: 10px;
+  padding-left: 0;
+
+  @media only screen and (max-width: 767px) {
+    padding: 10px 0;
+  }
+}
+
+.units__add,
+.button__container,
+.diffLevel__container {
+  padding: 10px;
+  padding-right: 0;
+
+  @media only screen and (max-width: 767px) {
+    padding: 10px 0;
+  }
+}
+
+.quantity__add {
+  input {
+    width: 100%;
+  }
+}
+
+.button__container {
+  display: flex;
+  align-items: flex-end;
+
+  .recipe__button {
+    width: 100%;
+  }
+}
+
+
+.input__file {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.input__file + label {
+  line-height: 17px;
+  margin:0;
+  width: calc(50% - 10px);
+  padding: 10px;
+  padding-left: 0;
+
+  @media only screen and (max-width: 767px) {
+    padding: 10px 0;
+    width: 100%;
+  }
+}
+
+.file-name {
+  margin-left: 30px;
+
+  @media only screen and (max-width: 767px) {
+    display: block;
+    margin-left: 10px;
+    padding: 15px 0;
+    width: 100%;
+  }
+}
+

@@ -26,8 +26,11 @@ export class IngredientService {
       server.address + ingredients.uri,
       ingredient,
       {
-        headers: this.headers.getContentType('application/json'),
-        observe: 'response'
+        headers: this.headers.getContentType('application/json', true),
+        observe: 'response',
+        params: {
+          nickname: this.headers.getNickname()
+        }
       }
     );
   }

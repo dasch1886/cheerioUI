@@ -28,11 +28,14 @@ export class RecipeService {
 
   create(recipeData: RecipeModel): Observable<HttpResponse<RecipeModel>> {
     return this.http.post<RecipeModel>(
-      server.address + recipes.uri,
+      server.address + recipe.uri,
       recipeData,
       {
-        headers: this.headers.getContentType('application/json'),
-        observe: 'response'
+        headers: this.headers.getContentType('application/json', true),
+        observe: 'response',
+        params: {
+          nickname: this.headers.getNickname()
+        }
       }
     );
   }
@@ -93,5 +96,9 @@ export class RecipeService {
     return this.http.get<Array<AuthorModel>>(
       server.address + recipes.uri + authors.uri,
     );
+  }
+
+  getDiffucultyLevels(): Array<string> {
+    return ['ławty', 'średni', 'trudny'];
   }
 }

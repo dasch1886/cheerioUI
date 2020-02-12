@@ -9,6 +9,7 @@ import { UserService } from './http/user/user.service';
 import { HeadersService } from './http/headers/headers.service';
 import { SessionService } from './services/session.service';
 import { SpinnerService } from './services/spinner.service';
+import { RoleGuardService } from './guards/role-guard.service';
 @NgModule({
   declarations: [],
   imports: [
@@ -16,6 +17,7 @@ import { SpinnerService } from './services/spinner.service';
     SharedModule,
   ],
   providers: [
+    RoleGuardService,
     IngredientService,
     RecipeService,
     UnitService,

@@ -47,7 +47,9 @@ main {
   }
 }
 
-.search__input {
+.search__input,
+.time__input,
+.degree__input {
   display: block;
   margin-right: 10px;
   width: 100%;
@@ -86,13 +88,31 @@ main {
 
 .search__advanced {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+
+  @media screen and (max-width: 992px) {
+    justify-content: space-between;
+  }
 
   & > app-autocomplete-input {
     margin-right: 10px;
+
+    @media screen and (max-width: 992px) {
+      width: 49%;
+      margin-right: 0px;
+    }
+
+    ::ng-deep {
+      .autocomplete__container {
+        width: auto;
+      }
+    }
   }
 
-  & > .adding__ingredient, .find {
+  & > .adding__ingredient,
+  .find {
+    margin: 10px 0;
     margin-right: 10px;
     height: 38px;
     padding: 0px 20px;
@@ -104,6 +124,11 @@ main {
     color: $buttonBg;
     transition: all 1s;
 
+    @media screen and (max-width: 992px) {
+      width: 49%;
+      margin-right: 0px;
+    }
+
     &:hover {
       color: $buttonBgHover;
     }
@@ -112,7 +137,7 @@ main {
   & > .ingredients {
     display: flex;
     align-items: center;
-    padding: 0 10px;
+    padding: 10px 10px;
     color: $buttonBg;
     height: 38px;
     background-color: white;
@@ -120,11 +145,36 @@ main {
     border-radius: 0.25rem;
     margin-right: 10px;
 
+    @media screen and (max-width: 992px) {
+      width: 49%;
+      margin-right: 0px;
+    }
+
     i.ingredient__remove {
       color: #717271;
       cursor: pointer;
       font-size: 20px;
       margin-left: 10px;
+    }
+  }
+
+  .time__input, .degree__input {
+    width: 200px;
+
+    @media screen and (max-width: 992px) {
+      width: 49%;
+      margin-right: 0px;
+    }
+
+    &:focus {
+      border-color: transparent;
+      box-shadow: 0 0 0 0.2rem rgba(113, 114, 113, 0.25);
+      transition: 0.5s all ease-out;
+
+      & + .fas {
+        color: #717271;
+        transition: all 0.5s;
+      }
     }
   }
 }

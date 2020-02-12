@@ -1,143 +1,192 @@
 <section class="add__container">
-  <div class="col-12 col-md-5 result__container">
-    <p class="text-center recipe__paragraph">
-      <ng-container *ngIf="title?.length>0 else subtitle">
-        {{title}}
-      </ng-container>
-      <ng-template #subtitle>
-        Title
-      </ng-template>
-    </p>
-    <p class="recipe__paragraph">
-      <ng-container *ngIf="desc?.length>0 else fordesc">
-        {{desc}}
-      </ng-container>
-      <ng-template #fordesc>
-        Description
-      </ng-template>
-    </p>
-    <span class="recipe__label px-0">
-      Ingredients :
-    </span>
-    <ul *ngIf="ingredientsAdded.value?.length>0"
-      class="recipe__ingredients"
-      (click)="removeIngredientFromArray($event.target)">
-      <li *ngFor="let item of ingredientsAdded.value; let i = index;">
-        {{nameIngredientsAdded[i]}}
-        {{item.quantity}}
-        <i class="fas fa-times-circle" attr.data-index={{i}}></i>
-      </li>
-    </ul>
-    <button type="button" class="btn btn-success" (click)="addRecipe()" [disabled]="recipeGroup.invalid">Send</button>
-  </div>
-  <div class="col-12 col-md-7 main__container">
-    <form [formGroup]="recipeGroup">
-      <div>
-        <span class="recipe__label">
-          Title:
-        </span>
-        <input formControlName="title"
-        (input)="renderView()"
-        class="form-control recipe__input"
-        type="text">
-      </div>
-      <div>
-        <span class="recipe__label">
-          Description:
-        </span>
-        <textarea formControlName="desc"
-        (input)="renderView()"
-        class="form-control recipe__textarea"
-        type="text">
-        </textarea>
-      </div>
-    </form>
-    <form [formGroup]="ingredientsGroup">
-      <div>
-        <span class="recipe__label">
-          Ingredient:
-        </span>
-        <div class="row no-gutters d-flex align-items-center">
-        <select formControlName="ingredientId"
-        class="form-control col-6 recipe__select px-2">
-          <option selected disabled hidden value="">
-            Choose ingredient
-          </option>
-          <ng-container *ngIf="(ingredients$ | async) as ingredients">
-            <option *ngFor="let item of ingredients"
-            value={{item.id}}>
-              {{item.name}}
-            </option>
-          </ng-container>
-        </select>
-        <i class="fas fa-plus-circle pl-2" data-toggle="modal" data-target="#newIngredient"></i>
-      </div>
-        <span *ngIf="errorService.errorsIngredientForm.ingredientId"
-        class="alert alert__error">
-          {{errorService.errorsIngredientForm.ingredientId}}
-        </span>
-      </div>
-      <div>
-        <span class="recipe__label">
-          Quantity:
-        </span>
-        <input formControlName="quantity"
-        class="form-control col-6 recipe__input"
-        type="text">
-        <span *ngIf="errorService.errorsIngredientForm.quantity"
-        class="alert alert__error">
-          {{errorService.errorsIngredientForm.quantity}}
-        </span>
-      </div>
-      <div>
-        <span class="recipe__label">
-          Unit measure:
-        </span>
-        <div class="select__scrollable">
-          <select formControlName="unitId"
-          class="form-control col-6 recipe__select">
-            <option selected disabled hidden value="">
-              Choose unit
-            </option>
-            <ng-container *ngIf="(unitsMeasure$ | async) as unitsMeasure">
-              <option *ngFor="let item of unitsMeasure"
-              value={{item.id}}>
-                {{item.name}}
-              </option>
-            </ng-container>
-          </select>
+
+  <section class="wrapper">
+
+    <div class="col-12 col-md-5 result__container">
+
+      <p class="text-center recipe__paragraph">
+
+        <ng-container *ngIf="title?.length>0 else subtitle">
+          {{title}}
+        </ng-container>
+
+        <ng-template #subtitle>
+          Title
+        </ng-template>
+      </p>
+
+      <p class="recipe__paragraph">
+
+        <ng-container *ngIf="desc?.length>0 else fordesc">
+          {{desc}}
+        </ng-container>
+
+        <ng-template #fordesc>
+          Description
+        </ng-template>
+      </p>
+
+      <span class="recipe__label px-0">
+        Ingredients :
+      </span>
+
+      <ul *ngIf="ingredientsAdded.value?.length>0" class="recipe__ingredients"
+        (click)="removeIngredientFromArray($event.target)">
+
+        <li *ngFor="let item of ingredientsAdded.value; let i = index;">
+          <span class="ingredient__name">{{item.name}}</span>
+          <span class="ingredient__amount">
+            {{item.amount}}
+            {{item.unitName}}
+            <i class="fas fa-times-circle" attr.data-index={{i}}></i>
+          </span>
+
+        </li>
+
+      </ul>
+
+      <p class="recipe__paragraph" *ngIf="executionTime!==null">
+
+        <ng-container>
+          Execution time: {{executionTime}} min
+        </ng-container>
+
+      </p>
+
+      <p class="recipe__paragraph" *ngIf="degree!==null">
+
+        <ng-container>
+          Difficulty level: {{degree}}
+        </ng-container>
+
+      </p>
+
+      <button type="button" class="btn btn-success" (click)="addRecipe()" [disabled]="recipeGroup.invalid">Send</button>
+    </div>
+
+    <div class="col-12 col-md-7 main__container">
+
+      <form [formGroup]="recipeGroup">
+
+        <div>
+          <span class="recipe__label">
+            Title:
+          </span>
+          <input formControlName="title" (input)="renderView()" class="form-control recipe__input" type="text">
         </div>
-        <span *ngIf="errorService.errorsIngredientForm.unitId"
-        class="alert alert__error">
-          {{errorService.errorsIngredientForm.unitId}}
-        </span>
-      </div>
-    </form>
-    <button class="btn btn-primary col-6 recipe__button"
-    (click)="addIngredientToArray()">
-      Add
-    </button>
-  </div>
-</section>
-<!--Modal for adding new ingredient-->
-<div class="modal fade" id="newIngredient" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Add a new ingredient</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+
+        <div>
+          <span class="recipe__label">
+            Description:
+          </span>
+          <textarea formControlName="desc" (input)="renderView()" class="form-control recipe__textarea" type="text">
+        </textarea>
+        </div>
+
+        <div>
+          <span class="recipe__label">
+            Choose imgage:
+          </span>
+          <input class="input__file" type="file" id="file" (change)="setImage($event)">
+          <label class="btn btn-primary recipe__button" for="file">file</label>
+          <span class="file-name" *ngIf="fileName!==null">{{fileName}}</span>
+        </div>
+
+        <div class="executionTime__container">
+          <span class="recipe__label">
+            Execution time (in minutes):
+          </span>
+
+          <input formControlName="executionTime" (input)="renderView()" class="form-control recipe__input" type="number"
+            min="1">
+
+        </div>
+
+        <div class="diffLevel__container">
+          <span class="recipe__label">
+            Difficulty level:
+          </span>
+
+          <app-autocomplete-input name="degree" [events]="eventsSubject.asObservable()" [array]="difficultyLeves"
+            (sendValue)="getValue($event)"></app-autocomplete-input>
+
+        </div>
+
+      </form>
+
+      <form [formGroup]="ingredientsGroup" class="ingredient__add">
+
+        <div class="ingredients__add">
+          <span class="recipe__label">
+            Ingredient:
+            <i class="fas fa-plus-circle pl-2 icon__add" data-toggle="modal" data-target="#newIngredient"></i>
+          </span>
+
+          <div class="row no-gutters d-flex align-items-center">
+            <app-autocomplete-input name="ingredient" [events]="eventsSubject.asObservable()" [array]="ingredients"
+              (sendValue)="getValue($event)"></app-autocomplete-input>
+
+          </div>
+
+        </div>
+
+        <div class="units__add">
+          <span class="recipe__label">
+            Unit measure:
+          </span>
+
+          <app-autocomplete-input [events]="eventsSubject.asObservable()" (sendValue)="getValue($event)" name="unit"
+            [array]="units"></app-autocomplete-input>
+
+        </div>
+
+        <div class="quantity__add">
+          <span class="recipe__label">
+            Quantity:
+          </span>
+
+          <input formControlName="amount" class="form-control recipe__input" type="number" min="0">
+
+        </div>
+
+        <div class="button__container">
+          <button class="btn btn-primary recipe__button" (click)="addIngredientToArray()">
+            Add
           </button>
         </div>
-        <form [formGroup]="ingredientGroup"
-        class="modal-body">
-            <input formControlName="name"
-            class="form-control col-12 recipe__input" placeholder="Entry name"/>
+
+      </form>
+
+    </div>
+
+  </section>
+
+</section>
+
+<!--Modal for adding new ingredient-->
+<div class="modal fade" id="newIngredient" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <h5 class="modal-title" id="exampleModalLongTitle">Add a new ingredient</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+
+      <form [formGroup]="ingredientGroup" class="modal-body">
+
+        <input formControlName="name" class="form-control col-12 recipe__input" placeholder="Entry name" />
+
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-success" (click)="addNewIngredient()">Add</button>
         </div>
+
       </form>
-      </div>
     </div>
   </div>
